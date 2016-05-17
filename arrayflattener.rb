@@ -1,17 +1,17 @@
 require 'pry'
-this = [[1,2,[3]],4]
 
-@result = []
-def smash(arr)
-  arr.each do |a|
-    # binding.pry
-    if a.class != Array
-      @result << a
-    else
-      smash(a)
-    end
+class Barray
+  attr_reader :flat
+
+  def initialize(array)
+    @array = array
   end
-  @result
-end
 
-print smash(this)
+  def flat
+    @array.to_s.gsub(/[\[\]]/, "").split(",").map { |s| s.to_f }
+  end
+
+  def length
+    self.flat.length
+  end
+end
